@@ -40,7 +40,7 @@ X_test_scaled = X_scaler.transform(X_test)
 ```
 
 ### Simple Logistic Regression
-!](https://github.com/bleachevil/ML-homework/blob/main/pic/simplelogisticRegression.png?raw=true)
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/simplelogisticRegression.png?raw=true)
 
 ## Oversampling
 ### Naive Random Oversampling
