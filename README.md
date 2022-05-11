@@ -1,6 +1,6 @@
 # ML-homework
 ## Credit Risk Resampling Techniques
-### import 
+### initial import 
 ```
 import warnings
 warnings.filterwarnings('ignore')
@@ -192,17 +192,128 @@ pic
 
 ### Final Questions
 
-1. Which model had the best balanced accuracy score?<b\ >
+1. Which model had the best balanced accuracy score?<br />
 
-Answer: SMOTE Oversampling model has the highest accuracy rate
+Answer: SMOTE Oversampling model has the highest accuracy rate. <br />
 
-2. Which model had the best recall score?
+2. Which model had the best recall score?<br />
 
-Answer: all the models have 0.99 recall rate.
+Answer: all the models have 0.99 recall rate.<br />
 
-3. Which model had the best geometric mean score?
+3. Which model had the best geometric mean score?<br />
 
-Answer: most of them has 0.99 beside simple logistic regression
+Answer: most of them has 0.99 beside simple logistic regression. <br />
 
 
+## Ensemble Learning
+
+### inital imports
+```
+import warnings
+warnings.filterwarnings('ignore')
+import numpy as np
+import pandas as pd
+from pathlib import Path
+from collections import Counter
+from sklearn.metrics import balanced_accuracy_score
+from sklearn.metrics import confusion_matrix
+from imblearn.metrics import classification_report_imbalanced
+```
+### Read the CSV and Perform Basic Data Cleaning
+```
+file_path = Path('Resources/LoanStats_2019Q1.csv')
+df = pd.read_csv(file_path)
+df.head()
+```
+pic
+
+### Split the Data into Training and Testing
+```
+X = df.drop(columns="loan_status")
+X = pd.get_dummies(X, columns=["home_ownership","verification_status","issue_d","pymnt_plan","initial_list_status","hardship_flag","debt_settlement_flag","next_pymnt_d","application_type"])
+# Create our target
+y = df['loan_status']
+X.describe()
+```
+pic
+
+### Data Pre-Processing
+```
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+scaler = StandardScaler()
+X_scaler = scaler.fit(X_train)
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)
+```
+
+## Ensemble Learners
+### Balanced Random Forest Classifier
+```
+from imblearn.ensemble import BalancedRandomForestClassifier
+rf_model = RandomForestClassifier(n_estimators=500, random_state=78)
+rf_model = rf_model.fit(X_train_scaled, y_train)
+y_pred = rf_model.predict(X_test_scaled)
+from sklearn.metrics import balanced_accuracy_score
+
+balanced_accuracy_score(y_test, y_pred)
+```
+0.6781593559262381
+```
+from sklearn.metrics import confusion_matrix
+confusion_matrix(y_test, y_pred)
+```
+array([[   36,    65],
+       [    2, 17102]], dtype=int64)
+```
+from imblearn.metrics import classification_report_imbalanced
+print(classification_report_imbalanced(y_test, y_pred))
+```
+pic
+```
+importances = rf_model.feature_importances_
+importances_sorted = sorted(zip(rf_model.feature_importances_, X.columns), reverse=True)
+importances_sorted[:10]
+```
+pic
+
+### Easy Ensemble Classifier
+```
+from imblearn.ensemble import EasyEnsembleClassifier
+rf_model = EasyEnsembleClassifier(random_state=42)
+rf_model = rf_model.fit(X_train_scaled, y_train)
+y_pred = rf_model.predict(X_test_scaled)
+from sklearn.metrics import balanced_accuracy_score
+
+balanced_accuracy_score(y_test, y_pred)
+```
+0.9201411400494586
+```
+from sklearn.metrics import confusion_matrix
+confusion_matrix(y_test, y_pred)
+```
+array([[   90,    11],
+       [  869, 16235]], dtype=int64)
+```
+from imblearn.metrics import classification_report_imbalanced
+print(classification_report_imbalanced(y_test, y_pred))
+```
+pic
+
+### Final Questions
+
+1.Which model had the best balanced accuracy score?<br />
+
+Answer: Easy ensemble model has best balanced accuacy score.<br />
+
+2.Which model had the best recall score?<br />
+
+Answer: Balanced Random Forest Classifier has best recall score.<br />
+
+3. Which model had the best geometric mean score?<br />
+
+Answer: Easy ensemble model has the best geometric mean score.<br />
+
+#4.What are the top three features?
+
+#last_pymnt_amnt, total_rec_int,total_pymnt_inv are the top three
 
