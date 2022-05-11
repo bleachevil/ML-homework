@@ -83,7 +83,7 @@ from imblearn.metrics import classification_report_imbalanced
 
 print(classification_report_imbalanced(y_test, y_pred))
 ```
-!](https://github.com/bleachevil/ML-homework/blob/main/pic/nativeramdonoversampling.png?raw=true)
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/nativeramdonoversampling.png?raw=true)
 
 ### SMOTE Oversampling
 ```
