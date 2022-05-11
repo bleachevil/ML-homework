@@ -17,7 +17,7 @@ file_path = Path('Resources/lending_data.csv')
 df = pd.read_csv(file_path)
 df.head()
 ```
-pic
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/readcsvdatasampling.png?raw=true)
 
 ### Split the Data into Training and Testing
 ```
@@ -27,7 +27,8 @@ X.head()
 # Create our target
 y = df['loan_status']
 ```
-pic2
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/splitdatatestingandtraining.png?raw=true)
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/splitdatatestingandtraining2.png?raw=true)
 
 ### Data Pre-Processing
 ```
@@ -39,7 +40,7 @@ X_test_scaled = X_scaler.transform(X_test)
 ```
 
 ### Simple Logistic Regression
-pic
+!](https://github.com/bleachevil/ML-homework/blob/main/pic/simplelogisticRegression.png?raw=true)
 
 ## Oversampling
 ### Naive Random Oversampling
@@ -82,7 +83,7 @@ from imblearn.metrics import classification_report_imbalanced
 
 print(classification_report_imbalanced(y_test, y_pred))
 ```
-pic
+!](https://github.com/bleachevil/ML-homework/blob/main/pic/nativeramdonoversampling.png?raw=true)
 
 ### SMOTE Oversampling
 ```
@@ -114,7 +115,7 @@ array([[  615,     4],
 ```
 print(classification_report_imbalanced(y_test, y_pred))
 ```
-pic
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/smoteoversampling.png?raw=true)
 
 ### Undersampling
 
@@ -150,7 +151,7 @@ array([[  606,    13],
 from imblearn.metrics import classification_report_imbalanced
 print(classification_report_imbalanced(y_test, y_pred))
 ```
-pic
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/undersampling.png?raw=true)
 
 ### Combination (Over and Under) Sampling
 ```
@@ -188,7 +189,7 @@ from imblearn.metrics import classification_report_imbalanced
 
 print(classification_report_imbalanced(y_test, y_pred))
 ```
-pic
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/combinationundersampling.png?raw=true)
 
 ### Final Questions
 
@@ -225,7 +226,7 @@ file_path = Path('Resources/LoanStats_2019Q1.csv')
 df = pd.read_csv(file_path)
 df.head()
 ```
-pic
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/readcsvdatalearning.png?raw=true)
 
 ### Split the Data into Training and Testing
 ```
@@ -235,7 +236,7 @@ X = pd.get_dummies(X, columns=["home_ownership","verification_status","issue_d",
 y = df['loan_status']
 X.describe()
 ```
-pic
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/Xdescribe.png?raw=true)
 
 ### Data Pre-Processing
 ```
@@ -268,13 +269,13 @@ array([[   36,    65],
 from imblearn.metrics import classification_report_imbalanced
 print(classification_report_imbalanced(y_test, y_pred))
 ```
-pic
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/balancedrandmforest.png?raw=true)
 ```
 importances = rf_model.feature_importances_
 importances_sorted = sorted(zip(rf_model.feature_importances_, X.columns), reverse=True)
 importances_sorted[:10]
 ```
-pic
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/top10.png?raw=true)
 
 ### Easy Ensemble Classifier
 ```
@@ -297,7 +298,7 @@ array([[   90,    11],
 from imblearn.metrics import classification_report_imbalanced
 print(classification_report_imbalanced(y_test, y_pred))
 ```
-pic
+![](https://github.com/bleachevil/ML-homework/blob/main/pic/Easyensembleclassifier.png?raw=true)
 
 ### Final Questions
 
@@ -313,7 +314,7 @@ Answer: Balanced Random Forest Classifier has best recall score.<br />
 
 Answer: Easy ensemble model has the best geometric mean score.<br />
 
-#4.What are the top three features?
+4.What are the top three features?
 
-#last_pymnt_amnt, total_rec_int,total_pymnt_inv are the top three
+Answer: last_pymnt_amnt, total_rec_int,total_pymnt_inv are the top three
 
